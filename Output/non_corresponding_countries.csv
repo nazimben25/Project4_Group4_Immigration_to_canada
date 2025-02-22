@@ -1,0 +1,97 @@
+,country,source
+0,Aruba,countries_wb
+4,Andorra,countries_wb
+8,American Samoa,countries_wb
+9,Antigua and Barbuda,countries_wb
+20,"Bahamas, The",countries_wb
+23,Belize,countries_wb
+24,Bermuda,countries_wb
+27,Barbados,countries_wb
+28,Brunei Darussalam,countries_wb
+34,Channel Islands,countries_wb
+37,Cote d'Ivoire,countries_wb
+39,"Congo, Dem. Rep.",countries_wb
+40,"Congo, Rep.",countries_wb
+42,Comoros,countries_wb
+43,Cabo Verde,countries_wb
+46,Curacao,countries_wb
+47,Cayman Islands,countries_wb
+49,Czechia,countries_wb
+52,Dominica,countries_wb
+57,"Egypt, Arab Rep.",countries_wb
+63,Fiji,countries_wb
+65,Faroe Islands,countries_wb
+66,"Micronesia, Fed. Sts.",countries_wb
+71,Gibraltar,countries_wb
+73,"Gambia, The",countries_wb
+77,Grenada,countries_wb
+78,Greenland,countries_wb
+80,Guam,countries_wb
+82,"Hong Kong SAR, China",countries_wb
+88,Isle of Man,countries_wb
+91,"Iran, Islamic Rep.",countries_wb
+101,Kyrgyz Republic,countries_wb
+103,Kiribati,countries_wb
+104,St. Kitts and Nevis,countries_wb
+105,"Korea, Rep.",countries_wb
+107,Lao PDR,countries_wb
+111,St. Lucia,countries_wb
+112,Liechtenstein,countries_wb
+116,Luxembourg,countries_wb
+118,"Macao SAR, China",countries_wb
+119,St. Martin (French part),countries_wb
+121,Monaco,countries_wb
+124,Maldives,countries_wb
+126,Marshall Islands,countries_wb
+129,Malta,countries_wb
+133,Northern Mariana Islands,countries_wb
+140,New Caledonia,countries_wb
+147,Nauru,countries_wb
+154,Palau,countries_wb
+157,Puerto Rico,countries_wb
+158,"Korea, Dem. People's Rep.",countries_wb
+161,West Bank and Gaza,countries_wb
+162,French Polynesia,countries_wb
+165,Russian Federation,countries_wb
+171,Solomon Islands,countries_wb
+174,San Marino,countries_wb
+178,Sao Tome and Principe,countries_wb
+179,Suriname,countries_wb
+180,Slovak Republic,countries_wb
+184,Sint Maarten (Dutch part),countries_wb
+185,Seychelles,countries_wb
+186,Syrian Arab Republic,countries_wb
+187,Turks and Caicos Islands,countries_wb
+193,Timor-Leste,countries_wb
+194,Tonga,countries_wb
+197,Turkiye,countries_wb
+198,Tuvalu,countries_wb
+205,St. Vincent and the Grenadines,countries_wb
+206,"Venezuela, RB",countries_wb
+207,British Virgin Islands,countries_wb
+208,Virgin Islands (U.S.),countries_wb
+209,Viet Nam,countries_wb
+210,Vanuatu,countries_wb
+211,Samoa,countries_wb
+213,"Yemen, Rep.",countries_wb
+251,Czech Republic,countries_gpi
+252,Democratic Republic of the Congo,countries_gpi
+256,East Timor,countries_gpi
+258,Egypt,countries_gpi
+282,Iran,countries_gpi
+287,Ivory Coast,countries_gpi
+295,Kyrgyzstan,countries_gpi
+296,Laos,countries_gpi
+323,North Korea,countries_gpi
+328,Palestine,countries_gpi
+337,Republic of the Congo,countries_gpi
+339,Russia,countries_gpi
+346,Slovakia,countries_gpi
+350,South Korea,countries_gpi
+357,Syria,countries_gpi
+358,Taiwan,countries_gpi
+362,The Gambia,countries_gpi
+366,Turkey,countries_gpi
+375,Venezuela,countries_gpi
+376,Vietnam,countries_gpi
+377,Yemen,countries_gpi
