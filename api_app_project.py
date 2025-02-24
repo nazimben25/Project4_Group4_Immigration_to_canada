@@ -18,7 +18,7 @@ from collections import defaultdict  # to generate dictionary 'precipitation
 ################################################
 # Database Setup
 ################################################
-engine = create_engine("sqlite:///immigration_canada.sqlite")
+engine = create_engine("sqlite:///db_canada_immigration.sqlite")
 
 
 # reflect an existing database into a new model
