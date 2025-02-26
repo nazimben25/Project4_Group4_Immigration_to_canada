@@ -87,138 +87,145 @@ def welcome():
 
         )
 
-# # route countries : returns the list of available countries 
+# route countries : returns the list of available countries in the immigration statistics 
 
-# @app.route("/api/v0.1/countries_list")
-# def countries_list():
+@app.route("/api/v0.1/countries_list_ircc")
+def countries_list():
 
-#     # Create our session (link) from Python to the DB
-#     session = Session(engine)
+    # Create our session (link) from Python to the DB
+    session = Session(engine)
 
-#     # query 'station' table
-#     results = session.query(immigration.country).distinct().order_by(immigration.country).all()
+    # query 'station' table
+    results = session.query(immigration.country).distinct().order_by(immigration.country).all()
          
-#     # close the session               
-#     session.close()
+    # close the session               
+    session.close()
 
-#     countries_list = []
-#     for country in results:
-#             # countries = {}
-#             # countries['Country_name'] = country[0]
-#             # countries_list.append(countries)
-#             countries_list.append(country[0])
+    countries_list = []
+    for country in results:
+            # countries = {}
+            # countries['Country_name'] = country[0]
+            # countries_list.append(countries)
+            countries_list.append(country[0])
 
    
-#     return jsonify({'a_Description': "available countries in the API", 'Data' :countries_list})
+    return jsonify({'a_Description': "available countries in the API", 'Data' :countries_list})
 
-# # # route countries : returns the list of available macro indicator 
+# # # # route Countries data : returns all the countries with additional information : region, cluster, lat, lon
 
-# @app.route("/api/v0.1/Macro_economic_indicators")
-# def Macro_economic_indicators():
+@app.route("/api/v0.1/countries_data")
+def immigation_flow_per_country():
 
-#     # Create our session (link) from Python to the DB
-#     session = Session(engine)
+    # Create our session (link) from Python to the DB
+    session = Session(engine)
 
-#     # query 'station' table
-#     results = session.query(macrodata.indicator).distinct().order_by(macrodata.indicator).all()
+
+    # grop by table ,               
+    result = session.query(countries.country, countries.region, countries.longitude,countries.latitude, clusters.cluster)\
+                    .join(clusters, countries.country == clusters.country) \
+                    .order_by(countries.country) \
+                    .all()
+
+    # close session
+    session.close()        
+    
+    #create a list to be jsonified, by loopong through the result above
+
+    countries_data_list = []
+    for country, region, lat, lon, cluster in result:
+        country_data_dict = {}
+        country_data_dict['country'] = country
+        country_data_dict['region'] = region
+        country_data_dict['cluster'] = cluster
+        country_data_dict['coordinates'] = {
+                                    'Longitude' : lon , 
+                                    'Latitude'  : lat 
+                                    }
+
+
+        countries_data_list.append(country_data_dict)
+
+    return jsonify(countries_data_list)
+    
+
+
+# # route countries : returns all indicators 
+
+@app.route("/api/v0.1/indicators_all")
+def Macro_economic_indicators():
+
+    # Create our session (link) from Python to the DB
+    session = Session(engine)
+
+    # query 'station' table
+    results = session.query(macrodata.indicator).distinct().order_by(macrodata.indicator).all()
          
-#     # close the session               
-#     session.close()
+    # close the session               
+    session.close()
 
-#     indicators_list = []
-#     for indicator in results:
-#             # countries = {}
-#             # countries['Country_name'] = country[0]
-#             # countries_list.append(countries)
-#             indicators_list.append(indicator[0])
+    indicators_list = []
+    for indicator in results:
+            # countries = {}
+            # countries['Country_name'] = country[0]
+            # countries_list.append(countries)
+            indicators_list.append(indicator[0])
 
    
-#     return jsonify(indicators_list)
+    return jsonify(indicators_list)
 
-# # # route immigration_yearly : returns the cumulated immigration flow per year - between to year (2015 and 2024)
 
-# @app.route("/api/v0.1/immigation_flow_per_year_between/<year_start>/<year_end>")
-# def immigation_flow_per_year_between(year_start, year_end):
 
-#     # Create our session (link) from Python to the DB
-#     session = Session(engine)
+# # route immigration_yearly : returns the cumulated immigration flow per year - between to year (2015 and 2024)
 
-#     print(f'Sunil is the best or is it felipe')
-#     # query measurment table for the last date in the DB
+@app.route("/api/v0.1/immigation_flow_per_year_between/<year_start>/<year_end>")
+def immigation_flow_per_year_between(year_start, year_end):
 
-# # set a condition to be sure that dates are consistant
+    # Create our session (link) from Python to the DB
+    session = Session(engine)
 
-#     if year_end >= year_start :
+    print(f'Sunil is the best or is it felipe')
+    # query measurment table for the last date in the DB
 
-#         # grop by table measurment, and calculate TMIN, TAVG, TMAX) for each date after filter of dates              
-#         result = session.query(immigration.country, func.sum(immigration.immigration_flow)\
-#                         .filter(immigration.year >= year_start)\
-#                         .filter(immigration.year <= year_end))\
-#                         .group_by(immigration.country) \
-#                         .order_by(func.sum(immigration.immigration_flow).desc()) \
-#                         .all()
+# set a condition to be sure that dates are consistant
 
-#         # close session
-#         session.close()        
+    if year_end >= year_start :
+
+        # grop by table measurment, and calculate TMIN, TAVG, TMAX) for each date after filter of dates              
+        result = session.query(immigration.country, func.sum(immigration.immigration_flow)\
+                        .filter(immigration.year >= year_start)\
+                        .filter(immigration.year <= year_end))\
+                        .group_by(immigration.country) \
+                        .order_by(func.sum(immigration.immigration_flow).desc()) \
+                        .all()
+
+        # close session
+        session.close()        
         
-#         #create a list to be jsonified, by loopong through the result above
+        #create a list to be jsonified, by loopong through the result above
  
-#         flow_by_country_list = []
-#         for country, sumflow in result:
-#             flow_dict = {}
-#             flow_dict['description'] = f'Immigration flow for the period between {year_start} and {year_end}'
-#             flow_dict['country'] = country
-#             flow_dict['flow'] = sumflow
+        flow_by_country_list = []
+        for country, sumflow in result:
+            flow_dict = {}
+            flow_dict['description'] = f'Immigration flow for the period between {year_start} and {year_end}'
+            flow_dict['country'] = country
+            flow_dict['flow'] = sumflow
 
 
-#             flow_by_country_list.append(flow_dict)
+            flow_by_country_list.append(flow_dict)
 
-#         return jsonify(flow_by_country_list)
+        return jsonify(flow_by_country_list)
     
-#     else : 
-#         # error message if dates are not consistant
-#         return 'NEIN!!! DAS IST NICH GUT !!! <br/> \
-#             <br/> \
-#             Year_end must be later than Year_start. <br/> \
-#             In other words, you must enter a "year_end" that is after the "year_start".' 
+    else : 
+        # error message if dates are not consistant
+        return 'NEIN!!! DAS IST NICH GUT !!! <br/> \
+            <br/> \
+            नहीं!!! यह अच्छा नहीं है <br/> \
+            <br/> \
+            NO!!! ESO NO ES BUENO <br/> \
+            <br/> \
+            Year_end must be later than Year_start. <br/> \
+            In other words, you must enter a "year_end" that is after the "year_start".' 
 
-# # # # route immigration_yearly : returns the cumulated immigration flow per year - between to year (2015 and 2024)
-
-# @app.route("/api/v0.1/immigation_flow_per_country")
-# def immigation_flow_per_country():
-
-#     # Create our session (link) from Python to the DB
-#     session = Session(engine)
-
-
-#     # grop by table ,               
-#     result = session.query(immigration.country, countries.region, countries.longitude,countries.latitude,func.sum(immigration.immigration_flow))\
-#                     .join(countries, immigration.country == countries.country) \
-#                     .group_by(immigration.country, countries.region) \
-#                     .order_by(func.sum(immigration.immigration_flow).desc()) \
-#                     .all()
-
-#     # close session
-#     session.close()        
-    
-#     #create a list to be jsonified, by loopong through the result above
-
-#     flow_by_country_list = []
-#     for country, region, lat, lon, sumflow in result:
-#         flow_dict = {}
-#         flow_dict['country'] = country
-#         flow_dict['region'] = region
-#         flow_dict['flow'] = sumflow
-#         flow_dict['coordinates'] = {
-#                                     'Longitude' : lon , 
-#                                     'Latitude'  : lat 
-#                                     }
-
-
-#         flow_by_country_list.append(flow_dict)
-
-#     return jsonify(flow_by_country_list)
-    
 
 
 # @app.route("/api/v0.1/immigration_statistics")
@@ -231,7 +238,7 @@ def welcome():
 #         macrodata.iso3Code.label("macro_iso3Code"),
 #         macrodata.indicator.label("indicator"),
 #         func.avg(macrodata.value).label("avg_value")
-#     ).group_by(macrodata.iso3Code, macrodata.indicator).subquery()
+#         ).group_by(macrodata.iso3Code, macrodata.indicator).subquery()
 
 #     # Create a subquery for immigration data
 #     immigration_subquery = session.query(
@@ -256,63 +263,63 @@ def welcome():
 #     ).all()
 
     
-# @app.route("/api/v0.1/immigration_statistics_per_country/<country_select>")
-# def immigration_statistics_per_country(country_select):
-#     # Create our session (link) from Python to the DB
-#     session = Session(engine)
+@app.route("/api/v0.1/immigration_statistics_per_country/<country_select>")
+def immigration_statistics_per_country(country_select):
+    # Create our session (link) from Python to the DB
+    session = Session(engine)
 
-#     # Create a subquery for macrodata
-#     macrodata_subquery = session.query(
-#         macrodata.iso3Code.label("macro_iso3Code"),
-#         macrodata.indicator.label("indicator"),
-#         func.avg(macrodata.value).label("avg_value")
-#     ).group_by(macrodata.iso3Code, macrodata.indicator).subquery()
+    # Create a subquery for macrodata
+    macrodata_subquery = session.query(
+        macrodata.iso3Code.label("macro_iso3Code"),
+        macrodata.indicator.label("indicator"),
+        func.avg(macrodata.value).label("avg_value")
+    ).group_by(macrodata.iso3Code, macrodata.indicator).subquery()
 
-#     # Create a subquery for immigration data
-#     immigration_subquery = session.query(
-#         immigration.country.label("country"),
-#         func.sum(immigration.immigration_flow).label("imm_flow")
-#     ).group_by(immigration.country).subquery()
+    # Create a subquery for immigration data
+    immigration_subquery = session.query(
+        immigration.country.label("country"),
+        func.sum(immigration.immigration_flow).label("imm_flow")
+    ).group_by(immigration.country).subquery()
 
-#     # Main query
-#     result = session.query(
-#         immigration_subquery.c.country,
-#         immigration_subquery.c.imm_flow,
-#         countries.iso3Code.label("country_iso3Code"),
-#         countries.region,
-#         countries.latitude,
-#         countries.longitude,
-#         macrodata_subquery.c.indicator,
-#         macrodata_subquery.c.avg_value
-#     ).join(
-#         countries, immigration_subquery.c.country == countries.country
-#     ).join(
-#         macrodata_subquery, countries.iso3Code == macrodata_subquery.c.macro_iso3Code
-#     ).filter(countries.iso3Code == country_select
+    # Main query
+    result = session.query(
+        immigration_subquery.c.country,
+        immigration_subquery.c.imm_flow,
+        countries.iso3Code.label("country_iso3Code"),
+        countries.region,
+        countries.latitude,
+        countries.longitude,
+        macrodata_subquery.c.indicator,
+        macrodata_subquery.c.avg_value
+    ).join(
+        countries, immigration_subquery.c.country == countries.country
+    ).join(
+        macrodata_subquery, countries.iso3Code == macrodata_subquery.c.macro_iso3Code
+    ).filter(countries.iso3Code == country_select
          
-#     ).all()
+    ).all()
 
-#     # Close session
-#     session.close()
+    # Close session
+    session.close()
 
-#     # Create a list to be JSONified
-#     flow_by_country_list = []
-#     for country, imm_flow, country_iso3Code, region, lat, lon, indicator, avg_value in result:
-#         flow_dict = {
-#             "country": country,
-#             "region": region,
-#             "flow": imm_flow,
-#             "code": country_iso3Code,
-#             "avg_value": avg_value,
-#             "indicator": indicator,
-#             "coordinates": {
-#                 "Longitude": lon,
-#                 "Latitude": lat
-#             }
-#         }
-#         flow_by_country_list.append(flow_dict)
+    # Create a list to be JSONified
+    flow_by_country_list = []
+    for country, imm_flow, country_iso3Code, region, lat, lon, indicator, avg_value in result:
+        flow_dict = {
+            "country": country,
+            "region": region,
+            "flow": imm_flow,
+            "code": country_iso3Code,
+            "avg_value": avg_value,
+            "indicator": indicator,
+            "coordinates": {
+                "Longitude": lon,
+                "Latitude": lat
+            }
+        }
+        flow_by_country_list.append(flow_dict)
 
-#     return jsonify(flow_by_country_list)
+    return jsonify(flow_by_country_list)
 
    
     
