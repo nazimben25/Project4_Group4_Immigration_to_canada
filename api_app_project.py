@@ -37,6 +37,7 @@ immigration = Base.classes.immigration
 macrodata = Base.classes.macrodata
 cpi = Base.classes.cpi
 gpi = Base.classes.gpi
+clusters = Base.classes.clusters
 
 # Create our session (link) from Python to the DB
 session = Session(engine)
@@ -47,6 +48,7 @@ print(session.query(immigration).first().__dict__)
 print(session.query(macrodata).first().__dict__)
 print(session.query(cpi).first().__dict__)
 print(session.query(gpi).first().__dict__)
+print(session.query(clusters).first().__dict__)
 
 
 #################################################
@@ -85,7 +87,7 @@ def welcome():
 
         )
 
-# route countries : returns the list of available countries 
+# # route countries : returns the list of available countries 
 
 # @app.route("/api/v0.1/countries_list")
 # def countries_list():
@@ -109,7 +111,7 @@ def welcome():
    
 #     return jsonify({'a_Description': "available countries in the API", 'Data' :countries_list})
 
-# # route countries : returns the list of available macro indicator 
+# # # route countries : returns the list of available macro indicator 
 
 # @app.route("/api/v0.1/Macro_economic_indicators")
 # def Macro_economic_indicators():
@@ -141,6 +143,7 @@ def welcome():
 #     # Create our session (link) from Python to the DB
 #     session = Session(engine)
 
+#     print(f'Sunil is the best or is it felipe')
 #     # query measurment table for the last date in the DB
 
 # # set a condition to be sure that dates are consistant
