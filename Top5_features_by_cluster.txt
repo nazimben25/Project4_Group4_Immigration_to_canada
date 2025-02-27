@@ -1,0 +1,94 @@
+cluster 0
+government consumption exp (% of GDP)
+Unemployment intermediate education
+doing business score
+Birth rate, crude (per 1,000 people)
+Population living in slums (% of urban population)
+
+array(['Australia', 'Austria', 'Bahamas, The', 'Bahrain', 'Barbados',
+       'Belgium', 'Bermuda', 'Brunei Darussalam', 'Bulgaria', 'Canada',
+       'Chile', 'China', 'Croatia', 'Cyprus', 'Czechia', 'Denmark',
+       'Estonia', 'Finland', 'France', 'Germany', 'Greece',
+       'Hong Kong SAR, China', 'Hungary', 'Iceland', 'Ireland', 'Israel',
+       'Italy', 'Japan', 'Korea, Rep.', 'Kuwait', 'Latvia',
+       'Liechtenstein', 'Lithuania', 'Luxembourg', 'Macao SAR, China',
+       'Malaysia', 'Malta', 'Marshall Islands', 'Netherlands',
+       'New Zealand', 'Norway', 'Oman', 'Poland', 'Portugal', 'Qatar',
+       'Romania', 'Russian Federation', 'San Marino', 'Saudi Arabia',
+       'Seychelles', 'Singapore', 'Slovak Republic', 'Slovenia', 'Spain',
+       'Sweden', 'Switzerland', 'Trinidad and Tobago',
+       'United Arab Emirates', 'United Kingdom', 'United States',
+       'Uruguay'], dtype=object)
+
+
+Cluster 1
+government  consumption exp (% of GDP)
+Control of Corruption: Estimate
+Unemployment, total (% of total labor force) (modeled ILO estimate)
+Population, total 
+Central government debt, total (% of GDP)
+
+array(['Albania', 'Algeria', 'Antigua and Barbuda', 'Argentina',
+       'Armenia', 'Azerbaijan', 'Belarus', 'Belize', 'Bhutan', 'Bolivia',
+       'Bosnia and Herzegovina', 'Botswana', 'Brazil', 'Bulgaria',
+       'Cabo Verde', 'China', 'Colombia', 'Costa Rica', 'Cuba',
+       'Djibouti', 'Dominica', 'Dominican Republic', 'Ecuador',
+       'Egypt, Arab Rep.', 'El Salvador', 'Fiji', 'Gabon', 'Georgia',
+       'Greece', 'Grenada', 'Guatemala', 'Guyana', 'Honduras', 'India',
+       'Indonesia', 'Iran, Islamic Rep.', 'Jamaica', 'Jordan',
+       'Kazakhstan', 'Kiribati', 'Kosovo', 'Kyrgyz Republic', 'Lebanon',
+       'Lesotho', 'Malaysia', 'Maldives', 'Mauritius', 'Mexico',
+       'Moldova', 'Mongolia', 'Montenegro', 'Morocco', 'Nepal',
+       'Nicaragua', 'North Macedonia', 'Palau', 'Panama', 'Paraguay',
+       'Peru', 'Philippines', 'Romania', 'Russian Federation', 'Serbia',
+       'South Africa', 'Sri Lanka', 'St. Lucia',
+       'St. Vincent and the Grenadines', 'Suriname', 'Thailand',
+       'Timor-Leste', 'Tonga', 'Tunisia', 'Turkiye', 'Tuvalu', 'Ukraine',
+       'Uzbekistan', 'Vanuatu', 'Viet Nam', 'West Bank and Gaza'],
+      dtype=object)
+
+
+
+
+Cluster 2
+Current health expenditure (% of GDP)
+Access to electricity (% of population)
+GDP per capita (constant 2015 US$)
+Unemployment advanced education
+Agricultural land (% ) 
+
+array(['Afghanistan', 'Angola', 'Benin', 'Burkina Faso', 'Burundi',
+       'Cameroon', 'Central African Republic', 'Chad', 'Congo, Dem. Rep.',
+       "Cote d'Ivoire", 'Ethiopia', 'Gambia, The', 'Ghana', 'Guinea',
+       'Guinea-Bissau', 'Honduras', 'India', 'Kenya', 'Lesotho',
+       'Liberia', 'Malawi', 'Mali', 'Mauritania', 'Mozambique', 'Niger',
+       'Nigeria', 'Pakistan', 'Rwanda', 'Sao Tome and Principe',
+       'Senegal', 'Sierra Leone', 'South Sudan', 'Tanzania', 'Togo',
+       'Uganda', 'Zambia', 'Zimbabwe'], dtype=object)
+
+
+
+Cluster 3
+Armed forces (% labor force)
+Control of Corruption: Estimate
+% of total population below 5 meters
+GDP growth (annual %)
+Agricultural land (% )
+
+array(['Afghanistan', 'Algeria', 'American Samoa', 'Andorra', 'Angola',
+       'Antigua and Barbuda', 'Bangladesh', 'Belize',
+       'British Virgin Islands', 'Burkina Faso', 'Burundi', 'Cambodia',
+       'Cameroon', 'Central African Republic', 'Chad', 'Comoros',
+       'Congo, Dem. Rep.', 'Congo, Rep.', 'Curacao', 'Djibouti',
+       'Equatorial Guinea', 'Eritrea', 'French Polynesia', 'Gabon',
+       'Ghana', 'Guatemala', 'Guinea', 'Guinea-Bissau', 'Guyana', 'Haiti',
+       'India', 'Iraq', 'Jordan', "Korea, Dem. People's Rep.", 'Kosovo',
+       'Lao PDR', 'Liberia', 'Libya', 'Madagascar', 'Malawi', 'Maldives',
+       'Mauritania', 'Monaco', 'Mozambique', 'Myanmar', 'Nauru', 'Nepal',
+       'New Caledonia', 'Nicaragua', 'Niger', 'Northern Mariana Islands',
+       'Oman', 'Pakistan', 'Palau', 'Papua New Guinea', 'Paraguay',
+       'Puerto Rico', 'Rwanda', 'Samoa', 'Senegal', 'Sierra Leone',
+       'Solomon Islands', 'Somalia', 'South Sudan', 'Sudan', 'Suriname',
+       'Syrian Arab Republic', 'Tajikistan', 'Tanzania', 'Timor-Leste',
+       'Tonga', 'Turkmenistan', 'Uganda', 'Uzbekistan', 'Venezuela, RB',
+       'West Bank and Gaza', 'Yemen, Rep.', 'Zimbabwe'], dtype=object)
