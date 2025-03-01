@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Immigration to Canada</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #map {
+            height: 500px;
+            width: 80%;
+            margin: 20px auto;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .nav-button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Immigration to Canada</h1>
+    <h3>Linking Canadian Immigration Trends with Socioeconomic Indicators</h3>
+    
+    <label for="country-select">Country Selection:</label>
+    <select id="country-select">
+        <option value="">Select a country</option>
+    </select>
+    
+    <div id="map"></div>
+    
+    <div class="button-container">
+        <button class="nav-button" onclick="location.href='page2.html'">General Analysis (Page 2)</button>
+        <button class="nav-button" onclick="location.href='page3.html'">Machine Learning Findings (Page 3)</button>
+    </div>
+    
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([56.1304, -106.3468], 4);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        let countryData = {};
+
+        // Fetch country list from local data.json
+        fetch('data/data.json')  
+            .then(response => response.json())
+            .then(data => {
+                console.log("Fetched Data:", data);  // Debugging output
+
+                if (!data.ref_country_codes || !Array.isArray(data.ref_country_codes)) {
+                    console.error("Error: JSON structure is incorrect", data);
+                    return;
+                }
+
+                let select = document.getElementById("country-select");
+                data.ref_country_codes.forEach(entry => {  // Accessing correct JSON structure
+                    let option = document.createElement("option");
+                    option.value = entry.country;
+                    option.textContent = entry.country;
+                    select.appendChild(option);
+
+                    // Store coordinates in object
+                    countryData[entry.country] = {
+                        lat: parseFloat(entry.latitude),
+                        lon: parseFloat(entry.longitude)
+                    };
+                });
+            })
+            .catch(error => console.error("Error loading local country data:", error));
+
+        // Event listener for dropdown change
+        document.getElementById("country-select").addEventListener("change", function() {
+            let selectedCountry = this.value;
+            if (selectedCountry && countryData[selectedCountry]) {
+                let { lat, lon } = countryData[selectedCountry];
+                console.log("Selected Country:", selectedCountry, "Lat:", lat, "Lon:", lon);
+                map.setView([lat, lon], 5);
+            }
+        });
+    </script>
+</body>
+</html>
+

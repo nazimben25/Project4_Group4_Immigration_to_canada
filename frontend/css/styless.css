@@ -1,0 +1,13 @@
+#map {
+    height: 500px;
+    width: 80%;
+    margin: 20px auto;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    background-color: white !important; /* Ensure it's visible */
+    z-index: 1;
+}
+
+.leaflet-container {
+    background-color: white !important; /* Ensure map renders properly */
+}

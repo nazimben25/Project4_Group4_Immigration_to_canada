@@ -15,6 +15,19 @@ from flask_cors import CORS
     
 from collections import defaultdict  # to generate dictionary 'precipitation
 
+from flask import Flask, send_from_directory
+
+app = Flask(__name__, static_url_path='', static_folder='frontend')
+
+# Serve CSS files correctly
+#@app.route('/css/styless.css')
+#def serve_css():
+#    return send_from_directory('frontend/css', 'styless.css')
+#
+#if __name__ == '__main__':
+#    app.run(debug=True)
+
+
 ################################################
 # Database Setup
 ################################################
@@ -38,6 +51,7 @@ macrodata = Base.classes.macrodata
 cpi = Base.classes.cpi
 gpi = Base.classes.gpi
 clusters = Base.classes.clusters
+indicators_clusters = Base.classes.indicators_clusters
 
 # Create our session (link) from Python to the DB
 session = Session(engine)
@@ -49,6 +63,7 @@ print(session.query(macrodata).first().__dict__)
 print(session.query(cpi).first().__dict__)
 print(session.query(gpi).first().__dict__)
 print(session.query(clusters).first().__dict__)
+print(session.query(indicators_clusters).first().__dict__)
 
 
 #################################################
@@ -72,25 +87,24 @@ def welcome():
         f"  <br/>"
         f"Available Routes:<br/>"
         f"  <br/>"
-        f"List of the countries available in IRCC data    : /api/v0.1/countries_list_ircc <br/>"
+        f"List of the countries available in IRCC data    : /api/proj4_v0.1/countries_list_ircc <br/>"
         f"  <br/>"
-        f"List of the countries coutries with additional information : region, cluster, lat, lon    : /api/v0.1/countries_data <br/>"
+        f"List of the countries coutries with additional information : region, cluster, lat, lon    : /api/proj4_v0.1/countries_data <br/>"
         f"  <br/>"
         f"List of the indicators available       : /api/v0.1/Macro_economic_indicators <br/>"
         f"  <br/>"
-        f"immigation_flow_per_year_between 2015 and 2024       : /api/v0.1/immigation_flow_per_year_between/<year_start>/<year_end> <br/>"
+        f"immigation_flow_per_year_between 2015 and 2024       : /api/proj4_v0.1/immigation_flow_per_year_between/<year_start>/<year_end> <br/>"
         f"  <br/>"
-        f"immigration_statistics_per_country (add the country code iso3 example : AGO for ANGLOA )       : /api/v0.1/immigration_statistics_per_country/country_select"
+        f"immigration_statistics_per_country (add the country code iso3 example : AGO for ANGLOA )       : /api/proj4_v0.1/immigration_statistics_per_country/country_select"
         f"  <br/>"
-        f"immigation_flow_per_country       : /api/v0.1/immigation_flow_per_country <br/>"
-        f"  <br/>"
-        f"Immigration_statistics for all countries and all indicators       : /api/v0.1/immigration_statistics <br/>"
+        f"Main indicators per cluster       : /api/proj4_v0.1/immigration_statistics_per_country/indicator_cluster"
+
 
         )
 
 # route countries : returns the list of available countries in the immigration statistics 
 
-@app.route("/api/v0.1/countries_list_ircc")
+@app.route("/api/proj4_v0.1/countries_list_ircc")
 def countries_list():
 
     # Create our session (link) from Python to the DB
@@ -104,17 +118,16 @@ def countries_list():
 
     countries_list = []
     for country in results:
-            # countries = {}
+            # countries_dict = {}
             # countries['Country_name'] = country[0]
             # countries_list.append(countries)
             countries_list.append(country[0])
 
-   
-    return jsonify({'a_Description': "available countries in the API", 'Data' :countries_list})
+    return jsonify(countries_list)   
 
 # # # # route Countries data : returns all the countries with additional information : region, cluster, lat, lon
 
-@app.route("/api/v0.1/countries_data")
+@app.route("/api/proj4_v0.1/countries_data")
 def immigation_flow_per_country():
 
     # Create our session (link) from Python to the DB
@@ -150,9 +163,9 @@ def immigation_flow_per_country():
     
 
 
-# # route countries : returns all indicators 
+# # route Indicators : returns all indicators 
 
-@app.route("/api/v0.1/indicators_all")
+@app.route("/api/proj4_v0.1/indicators_all")
 def Macro_economic_indicators():
 
     # Create our session (link) from Python to the DB
@@ -175,60 +188,35 @@ def Macro_economic_indicators():
     return jsonify(indicators_list)
 
 
+# route cluster_indicator : returns the list of main indicators for each cluster 
 
-# # # route immigration_yearly : returns the cumulated immigration flow per year - between to year (2015 and 2024)
+@app.route("/api/proj4_v0.1/indicators_clusters")
+def indicators_per_clusters():
 
-# @app.route("/api/v0.1/immigation_flow_per_year_between/<year_start>/<year_end>")
-# def immigation_flow_per_year_between(year_start, year_end):
+    # Create our session (link) from Python to the DB
+    session = Session(engine)
 
-#     # Create our session (link) from Python to the DB
-#     session = Session(engine)
+    # query 'station' table
+    results = session.query(indicators_clusters.cluster, indicators_clusters.indicator).order_by(indicators_clusters.cluster).all()
+         
+    # close the session               
+    session.close()
 
-#     # query measurment table for the last date in the DB
+    indicators_clusters_list = []
+    for cluster, indicator in results:
+        indicators_clusters_dict = {}
+        indicators_clusters_dict['cluster'] = cluster
+        indicators_clusters_dict['indicator'] = indicator
 
-# # set a condition to be sure that dates are consistant
+        indicators_clusters_list.append(indicators_clusters_dict)
 
-#     if year_end >= year_start :
+   
+    return jsonify(indicators_clusters_list)
 
-#         # grop by table measurment, and calculate TMIN, TAVG, TMAX) for each date after filter of dates              
-#         result = session.query(immigration.country, func.sum(immigration.immigration_flow)\
-#                         .filter(immigration.year >= year_start)\
-#                         .filter(immigration.year <= year_end))\
-#                         .group_by(immigration.country) \
-#                         .order_by(func.sum(immigration.immigration_flow).desc()) \
-#                         .all()
-
-#         # close session
-#         session.close()        
-        
-#         #create a list to be jsonified, by loopong through the result above
- 
-#         flow_by_country_list = []
-#         for country, sumflow in result:
-#             flow_dict = {}
-#             flow_dict['description'] = f'Immigration flow for the period between {year_start} and {year_end}'
-#             flow_dict['country'] = country
-#             flow_dict['flow'] = sumflow
-
-
-#             flow_by_country_list.append(flow_dict)
-
-#         return jsonify(flow_by_country_list)
-    
-#     else : 
-#         # error message if dates are not consistant
-#         return 'NEIN!!! DAS IST NICH GUT !!! <br/> \
-#             <br/> \
-#             नहीं!!! यह अच्छा नहीं है <br/> \
-#             <br/> \
-#             NO!!! ESO NO ES BUENO <br/> \
-#             <br/> \
-#             Year_end must be later than Year_start. <br/> \
-#             In other words, you must enter a "year_end" that is after the "year_start".' 
 
 # # route immigration_yearly : returns the cumulated immigration flow per year - between to year (2015 and 2024)
 
-@app.route("/api/v0.1/immigation_flow_per_year_between/<year_start>/<year_end>")
+@app.route("/api/proj4_v0.1/immigation_flow_per_year_between/<year_start>/<year_end>")
 def immigation_flow_per_year_between(year_start, year_end):
 
     # Create our session (link) from Python to the DB
@@ -290,8 +278,11 @@ def immigation_flow_per_year_between(year_start, year_end):
             <br/> \
             Year_end must be later than Year_start. <br/> \
             In other words, you must enter a "year_end" that is after the "year_start".' 
-    
-@app.route("/api/v0.1/immigration_statistics_per_country/<country_select>")
+
+
+
+
+@app.route("/api/proj4_v0.1/immigration_statistics_per_country/<country_select>")
 def immigration_statistics_per_country(country_select):
     # Create our session (link) from Python to the DB
     session = Session(engine)
@@ -351,7 +342,7 @@ def immigration_statistics_per_country(country_select):
 
  
 
-# @app.route("/api/v0.1/immigration_statistics")
+# @app.route("/api/proj4_v0.1/immigration_statistics")
 # def immigration_statistics():
 #     # Create our session (link) from Python to the DB
 #     session = Session(engine)
