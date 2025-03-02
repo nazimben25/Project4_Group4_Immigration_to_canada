@@ -1,0 +1,181 @@
+country,iso3Code,CPI_score_2023
+Denmark,DNK,90
+Finland,FIN,87
+New Zealand,NZL,85
+Norway,NOR,84
+Singapore,SGP,83
+Sweden,SWE,82
+Switzerland,CHE,82
+Netherlands,NLD,79
+Germany,DEU,78
+Luxembourg,LUX,78
+Ireland,IRL,77
+Canada,CAN,76
+Estonia,EST,76
+Australia,AUS,75
+Hong Kong,HKG,75
+Belgium,BEL,73
+Japan,JPN,73
+Uruguay,URY,73
+Iceland,ISL,72
+Austria,AUT,71
+France,FRA,71
+Seychelles,SYC,71
+United Kingdom,GBR,71
+Barbados,BRB,69
+United States,USA,69
+Bhutan,BTN,68
+United Arab Emirates,ARE,68
+Taiwan,TWN,67
+Chile,CHL,66
+Bahamas,BHS,64
+Cabo Verde,CPV,64
+"Korea, South",KOR,63
+Israel,ISR,62
+Lithuania,LTU,61
+Portugal,PRT,61
+Latvia,LVA,60
+Saint Vincent and the Grenadines,VCT,60
+Spain,ESP,60
+Botswana,BWA,59
+Qatar,QAT,58
+Czechia,CZE,57
+Dominica,DMA,56
+Italy,ITA,56
+Slovenia,SVN,56
+Costa Rica,CRI,55
+Saint Lucia,LCA,55
+Poland,POL,54
+Slovakia,SVK,54
+Cyprus,CYP,53
+Georgia,GEO,53
+Grenada,GRD,53
+Rwanda,RWA,53
+Fiji,FJI,52
+Saudi Arabia,SAU,52
+Malta,MLT,51
+Mauritius,MUS,51
+Croatia,HRV,50
+Malaysia,MYS,50
+Greece,GRC,49
+Namibia,NAM,49
+Vanuatu,VUT,48
+Armenia,ARM,47
+Jordan,JOR,46
+Kuwait,KWT,46
+Montenegro,MNE,46
+Romania,ROU,46
+Bulgaria,BGR,45
+Sao Tome and Principe,STP,45
+Jamaica,JAM,44
+Benin,BEN,43
+Ghana,GHA,43
+Oman,OMN,43
+Senegal,SEN,43
+Solomon Islands,SLB,43
+Timor-Leste,TLS,43
+Bahrain,BHR,42
+China,CHN,42
+Cuba,CUB,42
+Hungary,HUN,42
+Moldova,MDA,42
+North Macedonia,MKD,42
+Trinidad and Tobago,TTO,42
+Burkina Faso,BFA,41
+Kosovo,KSV,41
+South Africa,ZAF,41
+Vietnam,VNM,41
+Colombia,COL,40
+Côte d'Ivoire,CIV,40
+Guyana,GUY,40
+Suriname,SUR,40
+Tanzania,TZA,40
+Tunisia,TUN,40
+India,IND,39
+Kazakhstan,KAZ,39
+Lesotho,LSO,39
+Maldives,MDV,39
+Morocco,MAR,38
+Albania,ALB,37
+Argentina,ARG,37
+Belarus,BLR,37
+Ethiopia,ETH,37
+Gambia,GMB,37
+Zambia,ZMB,37
+Algeria,DZA,36
+Brazil,BRA,36
+Serbia,SRB,36
+Ukraine,UKR,36
+Bosnia and Herzegovina,BIH,35
+Dominican Republic,DOM,35
+Egypt,EGY,35
+Nepal,NPL,35
+Panama,PAN,35
+Sierra Leone,SLE,35
+Thailand,THA,35
+Ecuador,ECU,34
+Indonesia,IDN,34
+Malawi,MWI,34
+Philippines,PHL,34
+Sri Lanka,LKA,34
+Turkey,TUR,34
+Angola,AGO,33
+Mongolia,MNG,33
+Peru,PER,33
+Uzbekistan,UZB,33
+Niger,NER,32
+El Salvador,SLV,31
+Kenya,KEN,31
+Mexico,MEX,31
+Togo,TGO,31
+Djibouti,DJI,30
+Eswatini,SWZ,30
+Mauritania,MRT,30
+Bolivia,BOL,29
+Pakistan,PAK,29
+Papua New Guinea,PNG,29
+Gabon,GAB,28
+Laos,LAO,28
+Mali,MLI,28
+Paraguay,PRY,28
+Cameroon,CMR,27
+Guinea,GIN,26
+Kyrgyzstan,KGZ,26
+Russia,RUS,26
+Uganda,UGA,26
+Liberia,LBR,25
+Madagascar,MDG,25
+Mozambique,MOZ,25
+Nigeria,NGA,25
+Bangladesh,BGD,24
+Central African Republic,CAF,24
+Iran,IRN,24
+Lebanon,LBN,24
+Zimbabwe,ZWE,24
+Azerbaijan,AZE,23
+Guatemala,GTM,23
+Honduras,HND,23
+Iraq,IRQ,23
+Cambodia,KHM,22
+Congo,COG,22
+Guinea-Bissau,GNB,22
+Eritrea,ERI,21
+Afghanistan,AFG,20
+Burundi,BDI,20
+Chad,TCD,20
+Comoros,COM,20
+Democratic Republic of the Congo,COD,20
+Myanmar,MMR,20
+Sudan,SDN,20
+Tajikistan,TJK,20
+Libya,LBY,18
+Turkmenistan,TKM,18
+Equatorial Guinea,GNQ,17
+Haiti,HTI,17
+"Korea, North",PRK,17
+Nicaragua,NIC,17
+Yemen,YEM,16
+South Sudan,SSD,13
+Syria,SYR,13
+Venezuela,VEN,13
+Somalia,SOM,11
