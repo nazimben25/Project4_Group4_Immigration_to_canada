@@ -1,10 +1,10 @@
 # Project4_Group4_Immigration
 Project 4 output for Group 4 : Felipe Suarez, Sunilduth Baichoo, Nazim Bendjaballah
-
+ 
 1) Goal and Reasearch question
 Analyze immigration trends to Canada and examine the correlation between 
 the decision immigration to canada and different indicators (macroeconomic, social, and other).
-49 indicators will be used and will be compared to the immigration flow to canada (ratio of immigrant for each 100K people of the origin country population)
+49 indicators will be used and will be compared to the immigration flow to canada (ratio of immigrant for each 100K people of the gi origin country population)
 
     1.1) Reasearch question
         What are the indicators that motivate people to immigrate from their country ? (using canada as an example)
