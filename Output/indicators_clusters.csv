@@ -1,0 +1,21 @@
+index,cluster,indicator
+0,0,government consumption exp (% of GDP)
+1,0,Unemployment intermediate education
+2,0,doing business score
+3,0,"Birth rate, crude (per 1,000 people)"
+4,0,Population living in slums (% of urban population)
+5,1,government consumption exp (% of GDP)
+6,1,Control of Corruption: Estimate
+7,1,"Unemployment, total (% of total labor force) (modeled ILO estimate)"
+8,1,"Population, total"
+9,1,"Central government debt, total (% of GDP)"
+10,2,Current health expenditure (% of GDP)
+11,2,Access to electricity (% of population)
+12,2,GDP per capita (constant 2015 US$)
+13,2,Unemployment advanced education
+14,2,Agricultural land (% )
+15,3,Armed forces (% labor force)
+16,3,Control of Corruption: Estimate
+17,3,% of total population below 5 meters
+18,3,GDP growth (annual %)
+19,3,Agricultural land (% )
