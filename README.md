@@ -1,6 +1,14 @@
 # Project4_Group4_Immigration
 Project 4 output for Group 4 : Felipe Suarez, Sunilduth Baichoo, Nazim Bendjaballah
 
+0) how to run the front end ?
+
+    - run api_app_project.py
+    - run api_deployment_model.py
+    - run the index.html
+
+
+
 1) Goal and Reasearch question
 Analyze immigration trends to Canada and examine the correlation between 
 the decision immigration to canada and different indicators (macroeconomic, social, and other).
@@ -38,11 +46,10 @@ the decision immigration to canada and different indicators (macroeconomic, soci
         - Data_collection_ETL_DataB_creation : 4 notebooks for data collection, cleaning, transformation and database creation
         - Output : csv and xls files from data collection and transformation
         - Output_analysis : csv and xls files from different analysis
-        - Other_cleaning_and tranformation : 2 files for ml clustering + 1 of linear regression via scipy.stats
-        - deployment : 2 files for deployment app.js and deploy.html
-        - ML_analysis : 3 notenooks for ML analysis and model development
-        - Model_pkl : 3 machine learning models for deployment.
-        - frontend : contain all the package for the html pages including the JS and CSS files + pkl files for modele deployment
+        - deployment : includes 2 files for deployment : app.js and deploy.html
+        - ML_analysis : 3 jupyter notenooks for Machine learning analysis and model development
+        - Model_pkl : 3 machine learning models deployed.
+        - frontend : contains all the package to run index.html page including : JS and CSS files + pkl files for modele deployment
 
 
 3) ENVIRONMENTS & CODE PRESENTATION
@@ -61,35 +68,22 @@ the decision immigration to canada and different indicators (macroeconomic, soci
                 from io import StringIO
                 import zipfile
                 import io
-
-
-            3.1.1.2) DATA TRANSFORMATION and LOAD
                 from scipy.stats 
-
-            3.1.1.3) DATA BASE CREATION
                 sqlalchemy 
-
-            3.1.1.4) API
                from datetime import timedelta, datetime
                 from dateutil.relativedelta 
                 from flask           
                 from collections
 
-
         3.1.2) Machine learning
-            3.1.2.1) ML ANALYSIS AND MODELLING
                 import matplotlib.pyplot as plt
                 import seaborn as sns
                 import sklearn
                 import joblib
-
-            3.1.2.2) CLUSTERING AND MODEL REFINEMENT
                 import seaborn as sns
                import joblib
-
-    
+  
         3.1.3) Front end
-            3.1.3.1) MODEL DEPLOYMENT
 
 
     3.2) CODE PRESENTATION
@@ -132,57 +126,18 @@ the decision immigration to canada and different indicators (macroeconomic, soci
             3.2.2.2) data cleaning and transformation
             use Data_collection_ETL_DataB_creation\data_compiling.ipynb
 
-                => countries data
-                    - drop rows with nan representing regions
-                    - change type of data
+                => Data cleaning, transformation and loading
+                    drop rows, drop columns, rename columns, replace countries names, map months, change data type, replace empty values, replace NAN values, reset index,  pivot columns, unpivot columns (melt)
 
-                => immigration data
-                    - drop columns in frensh
-                    - data type conversion
-                    - replace empty values
-                    - replace NAN values
-
-                    - replace country name : the names used in the 2 datasets do not match
-                        => identify the mismatch and manually create a mapping dictionary 
-                        =>  replace 78 countries to be in line with World bank
-                    - rename columns
-
-                    - map months to get the numeric value (exp : mars : 3, apr : 4)
-                    - reset index
-
-                => macroeconomic data
-                    - retrieve countries list from immigration
-                    
-                    - replace Nan
-                            - pivot the DF 
-                            - replace nan of 1st column
-                            - replcae nan of other columns
-                            = unpivot (melt) 
-
-
-                    : drop and rename columns after merge
-                    - change data type
-
-                => Corruption perception indicator
-                - drop columns
-                - rename columns
-
-                => Global Peace Index data
-                - drop columns
-                - rename columns
-                - replace country name : the names used in the 2 datasets do not match
-                    => identify the mismatch and manually create a mapping dictionary 
-                    =>  replace 21 countries to be in line with World bank
-
-            outputs
-                - csv countries_UN_referential: Countries list United Nations referential 
-                - csv immigrants_by_country_monthly: immigration by country and by month from 2015 to 2024
-                - csv macro_economic_data: selected indicators for each country and by year from 2015 to 2024
-                - csv Global_Peace_Index : data for this indicator for 2023
-                - csv corruption_perception_index : data for this indicator for 2023
-                - csv full_indicators_by_country_by_year_long
-                - csv full_indicators_by_country_by_year
-                - csv full_indicators_by_country
+                => outputs
+                    - csv countries_UN_referential: Countries list United Nations referential 
+                    - csv immigrants_by_country_monthly: immigration by country and by month from 2015 to 2024
+                    - csv macro_economic_data: selected indicators for each country and by year from 2015 to 2024
+                    - csv Global_Peace_Index : data for this indicator for 2023
+                    - csv corruption_perception_index : data for this indicator for 2023
+                    - csv full_indicators_by_country_by_year_long
+                    - csv full_indicators_by_country_by_year
+                    - csv full_indicators_by_country
 
             3.2.1.3) creation database
             use Data_collection_ETL_DataB_creation\db_create.ipynb
@@ -191,7 +146,7 @@ the decision immigration to canada and different indicators (macroeconomic, soci
                 Created by : SQLAlechemy
                 Inputs : csv files, from Data cllection and trnaformation step
                 declarative_base method
-                Output  7 tables : countries, immigration, macrodata, pci, gpi, clusters, indicators_clusters
+                Output  db_canada_immigration, 7 tables : countries, immigration, macrodata, pci, gpi, clusters, indicators_clusters
             
             3.2.1.4) creation API
                 use api_app_project.py
