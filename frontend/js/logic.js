@@ -66,7 +66,7 @@ console.log(url)
                                 fillColor: clusterColors[cluster] || "gray", // Default gray if undefined
                                 // Setting our circle's radius to equal the output of our markerSize() function:
                                 // This will make our marker's size proportionate to its population.
-                                radius: flow_100k > 7.08 ? flow_100k * 300 : flow_100k * 20000,  // Example condition
+                                radius: flow_100k > 1000 ? flow_100k * 25 : flow_100k *1500,  // Example condition
                                 stroke: false,
 
                                 })
