@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     }]
                 },
                 options: {
-                    responsive: true,
+                    responsive: false,
                     maintainAspectRatio: true,  // Keeps chart proportions
                     scales: {
                         y: { beginAtZero: true }

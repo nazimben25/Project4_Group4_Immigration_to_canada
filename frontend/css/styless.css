@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: Arial, ;
     text-align: center;
 }
 
@@ -26,7 +26,7 @@ th {
 }
 
 .chart-container {
-    width: 80%;
+    width: 75%;
     max-width: 500px;  /* Prevents the chart from being too big */
     height: 300px;
     margin: auto;
