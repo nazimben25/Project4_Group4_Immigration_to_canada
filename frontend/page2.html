@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Immigration Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        label, select, button {
+            margin-top: 10px;
+            display: block;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            position: fixed;
+            bottom: 20px;
+            width: 100%;
+            padding: 10px;
+        }
+        .nav-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+        }
+        .nav-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Immigration Prediction Using Top 5 Features</h1>
+    <p>Select a country sample to get the prediction:</p>
+    <select id="countrySelect">
+        <option value="algeria2023">Algeria</option>
+        <option value="belgium2023">Belgium</option>
+        <option value="colombia2023">Colombia</option>
+        <option value="mauritius2023">Mauritius</option>
+    </select>
+    <button id="predictButton">Predict</button>
+
+    <h2>Prediction Result:</h2>
+    <div id="predictionResult"></div>
+
+    <!-- Navigation Buttons -->
+    <div class="button-container">
+        <button class="nav-button" onclick="location.href='index.html'">Go to Home</button>
+        <button class="nav-button" onclick="location.href='page3.html'">Next Page</button>
+    </div>
+
+    <script src="js/page2.js" defer></script>
+</body>
+</html>

@@ -14,6 +14,15 @@ from flask import Flask, jsonify
 from flask_cors import CORS
     
 from collections import defaultdict  # to generate dictionary 'precipitation
+from flask import send_from_directory
+
+app = Flask(__name__)
+CORS(app)
+
+@app.route('/frontend/data/<path:filename>')
+def serve_static_data(filename):
+    return send_from_directory('frontend/data', filename)
+
 
 ################################################
 # Database Setup
@@ -64,6 +73,26 @@ CORS(app)
 
 ## welcome route presentation of the 6 routes available
 
+@app.route("/api/proj4_v0.1/top_countries_by_indicator/<indicator>", methods=['GET'])
+def get_top_countries_by_indicator(indicator):
+    # Create a session
+    session = Session(engine)
+
+    # Query to get the top 5 countries based on the selected indicator
+    results = session.query(
+        macrodata.country, macrodata.value
+    ).filter(macrodata.indicator == indicator) \
+     .order_by(macrodata.value.desc()) \
+     .limit(5).all()
+
+    # Close session
+    session.close()
+
+    # Format the results
+    top_countries = [{"country": row[0], "value": row[1]} for row in results]
+
+    return jsonify(top_countries)
+
 @app.route("/")
 
 def welcome():
@@ -89,8 +118,78 @@ def welcome():
 
         )
 
-# route countries : returns the list of available countries in the immigration statistics 
 
+# Route for Immigration flow per country
+@app.route('/api/proj4_v0.1/immigration_flow_per_country', methods=['GET'])
+def immigration_flow_per_country():
+    session = Session(engine)  # Ensure 'engine' is properly defined
+    result = session.query(countries.country, countries.region, countries.latitude, countries.longitude, clusters.cluster)\
+        .join(clusters, countries.country == clusters.country)\
+        .order_by(countries.country).all()
+    session.close()
+
+    countries_data_list = []
+    for country, region, lat, lon, cluster in result:
+        countries_data_list.append({
+            "country": country,
+            "region": region,
+            "latitude": lat,
+            "longitude": lon,
+            "cluster": cluster
+        })
+
+    return jsonify(countries_data_list)
+
+@app.route("/api/proj4_v0.1/immigation_flow")
+def immigation_flow():
+    # Create our session (link) from Python to the DB
+    session = Session(engine)
+    # query measurment table for the last date in the DB
+    # set a condition to be sure that dates are consistant
+    # result = session.query(countries.country, countries.region, countries.longitude,countries.latitude, clusters.cluster)\
+    #                 .join(clusters, countries.country == clusters.country) \
+    #                 .order_by(countries.country) \
+    #                 .all()
+    # close session
+        # Create a subquery for macrodata
+    macrodata_subquery = session.query(
+                                            macrodata.country.label("country"),
+                                            func.sum(macrodata.value).label("flow_100k")) \
+        .filter(macrodata.indicator == 'immigration_100k') \
+        .group_by(macrodata.country).subquery()
+        # grop by table measurment, and calculate TMIN, TAVG, TMAX) for each date after filter of dates
+    result = session.query(
+                        immigration.country,
+                        func.sum(immigration.immigration_flow).label("flow"),\
+                        macrodata_subquery.c.flow_100k,
+                        countries.region, countries.longitude,countries.latitude, clusters.cluster
+                        ) \
+                        .group_by(immigration.country) \
+                        .order_by(func.sum(immigration.immigration_flow).desc()) \
+                        .join(
+                               macrodata_subquery, immigration.country == macrodata_subquery.c.country)\
+                        .join(countries, countries.country == immigration.country) \
+                        .join(clusters, clusters.country == immigration.country) \
+                        .all()
+        # close session
+    session.close()
+        #create a list to be jsonified, by loopong through the result above
+    flow_by_country_list = []
+    for country, sumflow, sumflow_k, region, lat, lon, cluster in result:
+            flow_dict = {}
+            flow_dict['country'] = country
+            flow_dict['flow'] = sumflow
+            flow_dict['flow_100k'] = sumflow_k
+            flow_dict['region'] = region
+            flow_dict['cluster'] = cluster
+            flow_dict['coordinates'] = {
+                                    'Longitude' : lon ,
+                                    'Latitude'  : lat
+                                    }
+            flow_by_country_list.append(flow_dict)
+    return jsonify(flow_by_country_list)
+     
+# route countries : returns the list of available countries in the immigration statistics 
 @app.route("/api/proj4_v0.1/countries_list_ircc")
 def countries_list():
 
@@ -111,6 +210,21 @@ def countries_list():
             countries_list.append(country[0])
 
     return jsonify(countries_list)   
+
+
+# Route COnutry List
+@app.route("/api/proj4_v0.1/countries_list", methods=['GET'])
+def get_countries_list():
+    session = Session(engine)
+    results = session.query(immigration.country).distinct().order_by(immigration.country).all()
+    session.close()
+
+    # Convert the query result to a list
+    countries_list = [country[0] for country in results]
+
+    return jsonify({'countries': countries_list})
+
+
 
 # # # # route Countries data : returns all the countries with additional information : region, cluster, lat, lon
 
@@ -369,3 +483,39 @@ def immigration_statistics_per_country(country_select):
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+# =====================================================
+# NEW ROUTES APPENDED (Countries List & Features Fetch)
+# =====================================================
+
+@app.route("/api/proj4_v0.1/countries_list", methods=['GET'])
+def get_countries():
+    session = Session(engine)
+    results = session.query(immigration.country).distinct().order_by(immigration.country).all()
+    session.close()
+
+    countries_list = [country[0] for country in results]
+    return jsonify({'countries': countries_list})
+
+@app.route("/api/proj4_v0.1/get_features/<country>", methods=['GET'])
+def get_country_features(country):
+    session = Session(engine)
+    
+    result = session.query(macrodata.indicator, macrodata.value) \
+        .filter(macrodata.country == country) \
+        .filter(macrodata.indicator.in_([
+            'government consumption exp (% of GDP)', 
+            'Unemployment intermediate education',
+            'Birth rate, crude (per 1,000 people)', 
+            'doing business score',
+            'Population living in slums (% of urban population)'
+        ])).all()
+    
+    session.close()
+
+    if not result:
+        return jsonify({'error': 'No feature data found for the selected country.'}), 404
+
+    feature_values = [row[1] for row in result]
+    return jsonify({'features': feature_values})

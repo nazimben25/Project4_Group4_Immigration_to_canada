@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indicator Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/page5.js" defer></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        select {
+            padding: 5px;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        table {
+            margin: auto;
+            border-collapse: collapse;
+            width: 50%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #ddd;
+        }
+        canvas {
+            max-width: 600px;  /* Adjust width */
+            max-height: 300px; /* Adjust height */
+            display: block;
+            margin: auto;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding: 20px;
+        }
+        .button-container a {
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: blue;
+            color: white;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .button-container a:hover {
+            background-color: darkblue;
+        }
+    </style>
+</head>
+<body>
+    <h1>Indicator Dashboard</h1>
+    <label for="indicatorDropdown">Select an Indicator:</label>
+    <select id="indicatorDropdown"></select>
+
+    <h3>Top Countries by Selected Indicator</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Country</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody id="table-body"></tbody>
+    </table>
+
+    <h3>Indicator Chart</h3>
+    <canvas id="indicatorChart"></canvas>
+
+    <div class="button-container">
+        <a href="page3.html">Go to Page 3</a>
+        <a href="index.html">Go to Index</a>
+    </div>
+</body>
+</html>

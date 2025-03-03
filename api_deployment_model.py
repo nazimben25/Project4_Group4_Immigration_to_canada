@@ -33,5 +33,5 @@ def predict():
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    # Run the Flask app on port 5000 (adjust host and port as needed)
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    # Run the Flask app on port 5001 (adjust host and port as needed)
+    app.run(host='0.0.0.0', port=5001, debug=True)
