@@ -73,6 +73,7 @@ CORS(app)
 
 ## welcome route presentation of the 6 routes available
 
+
 @app.route("/api/proj4_v0.1/top_countries_by_indicator/<indicator>", methods=['GET'])
 def get_top_countries_by_indicator(indicator):
     # Create a session
@@ -80,9 +81,10 @@ def get_top_countries_by_indicator(indicator):
 
     # Query to get the top 5 countries based on the selected indicator
     results = session.query(
-        macrodata.country, macrodata.value
-    ).filter(macrodata.indicator == indicator) \
-     .order_by(macrodata.value.desc()) \
+        macrodata.country, func.avg(macrodata.value.label("value_avg"))
+        ).filter(macrodata.indicator == indicator) \
+     .group_by(macrodata.country) \
+     .order_by(func.avg(macrodata.value).desc()) \
      .limit(5).all()
 
     # Close session
@@ -92,6 +94,27 @@ def get_top_countries_by_indicator(indicator):
     top_countries = [{"country": row[0], "value": row[1]} for row in results]
 
     return jsonify(top_countries)
+
+
+# @app.route("/api/proj4_v0.1/top_countries_by_indicator/<indicator>", methods=['GET'])
+# def get_top_countries_by_indicator(indicator):
+#     # Create a session
+#     session = Session(engine)
+
+#     # Query to get the top 5 countries based on the selected indicator
+#     results = session.query(
+#         macrodata.country, macrodata.value
+#     ).filter(macrodata.indicator == indicator) \
+#      .order_by(macrodata.value.desc()) \
+#      .limit(5).all()
+
+#     # Close session
+#     session.close()
+
+#     # Format the results
+#     top_countries = [{"country": row[0], "value": row[1]} for row in results]
+
+#     return jsonify(top_countries)
 
 @app.route("/")
 
