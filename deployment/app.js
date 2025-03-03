@@ -25,7 +25,7 @@ document.getElementById('predictButton').addEventListener('click', function() {
   
   // Send the POST request using fetch.
   // Adjust the URL to match your backend endpoint.
-  fetch('http://localhost:5000/predict', { 
+  fetch('http://localhost:5001/predict', { 
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
