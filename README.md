@@ -42,6 +42,7 @@ the decision immigration to canada and different indicators (macroeconomic, soci
         - deployment : 2 files for deployment app.js and deploy.html
         - ML_analysis : 3 notenooks for ML analysis and model development
         - Model_pkl : 3 machine learning models for deployment.
+        - frontend : contain all the package for the html pages including the JS and CSS files + pkl files for modele deployment
 
 
 3) ENVIRONMENTS & CODE PRESENTATION
@@ -55,104 +56,41 @@ the decision immigration to canada and different indicators (macroeconomic, soci
                 import pathlib as path
                 import requests
                 import json
-                from pprint import pprint
+                from pprint 
                 import numpy as np
                 from io import StringIO
-
-                # to read the ZIP file
-                    import requests
-                    import zipfile
-                    import io
+                import zipfile
+                import io
 
 
             3.1.1.2) DATA TRANSFORMATION and LOAD
-                import pandas as pd
-                import pathlib as path
-                import requests
-                import json
-                from pprint import pprint
-                import numpy as np
-                from scipy.stats import linregress
+                from scipy.stats 
 
             3.1.1.3) DATA BASE CREATION
-                # Import SQL Alchemy
-                from sqlalchemy import create_engine
-
-                # Import and establish Base for which classes will be constructed
-                from sqlalchemy.ext.declarative import declarative_base
-
-                # Import modules to declare columns and column data types
-                from sqlalchemy import Column, Integer, String, Float, Boolean, MetaData, Table, ForeignKey
-
-                # Import the Python SQL toolkit and Object Relational Mapper
-                import sqlalchemy
-                from sqlalchemy.ext.automap import automap_base
-                from sqlalchemy.orm import Session
-                from sqlalchemy import create_engine, inspect
-
-                import pandas as pd
+                sqlalchemy 
 
             3.1.1.4) API
-                import sqlalchemy
-                from sqlalchemy.ext.automap import automap_base
-                from sqlalchemy.orm import Session
-                from sqlalchemy import create_engine, func
-                import numpy as np
-                from datetime import timedelta, datetime
-                from dateutil.relativedelta import relativedelta
-                from flask import Flask, jsonify
-                from flask_cors import CORS           
-                from collections import defaultdict
+               from datetime import timedelta, datetime
+                from dateutil.relativedelta 
+                from flask           
+                from collections
 
 
         3.1.2) Machine learning
             3.1.2.1) ML ANALYSIS AND MODELLING
-                import pandas as pd
-                import numpy as np
                 import matplotlib.pyplot as plt
                 import seaborn as sns
-                from sklearn.model_selection import train_test_split
-                from sklearn.linear_model import LinearRegression
-                from sklearn.ensemble import RandomForestRegressor
-                from sklearn.metrics import mean_squared_error, r2_score
-                from sklearn.model_selection import GridSearchCV
+                import sklearn
                 import joblib
 
             3.1.2.2) CLUSTERING AND MODEL REFINEMENT
-                # libraries for data manipulation and visualization
-                import pandas as pd
-                import numpy as np
-                from pathlib import Path
-                import matplotlib.pyplot as plt
-                import hvplot.pandas
                 import seaborn as sns
-
-                # libraries for Unsupervised learning
-                from sklearn.preprocessing import StandardScaler
-                from sklearn.cluster import KMeans
-                from sklearn.decomposition import PCA
-
-                # libraries for supervised learning and model evaluation
-                from sklearn.metrics import confusion_matrix, classification_report
-                from sklearn.model_selection import train_test_split
-                from sklearn.linear_model import LogisticRegression
-                from sklearn.linear_model import LinearRegression
-                from sklearn.ensemble import RandomForestRegressor
-                from sklearn.metrics import mean_squared_error, r2_score
-                from sklearn.model_selection import GridSearchCV
-                from scipy.stats import linregress
-
-                # Tool to searilize both the fitted StandardScaler and the best estimator from the grid search
-                import joblib
-
+               import joblib
 
     
         3.1.3) Front end
             3.1.3.1) MODEL DEPLOYMENT
-                from flask import Flask, request, jsonify
-                from flask_cors import CORS
-                import joblib
-                import numpy as np
+
 
     3.2) CODE PRESENTATION
 
@@ -274,6 +212,7 @@ the decision immigration to canada and different indicators (macroeconomic, soci
             use ML_analysis/ML_analysis_clustered_data_SL_Top5_features.ipynb
 
 
-
         3.2.3) Front end
-
+            run api_app_project.py
+            run api_deployment_model.py
+            run the index.html
